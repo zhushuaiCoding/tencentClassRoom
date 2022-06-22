@@ -7,7 +7,9 @@ import com.tencent.tencentclassroom.model.M3u8Execle;
 import com.tencent.tencentclassroom.utils.Constant;
 import com.tencent.tencentclassroom.utils.ExecleFileUtils;
 import com.tencent.tencentclassroom.utils.StringUtils;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
