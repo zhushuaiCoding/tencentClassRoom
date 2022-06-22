@@ -25,17 +25,17 @@ public class ThreadPoolTest {
     @Test
     public void getTest() throws Exception {
 
-        List<M3u8Execle> m3u8Execles = ExecleFileUtils.readExecle("E:\\【图灵VIP严选课程】JAVA互联网架构师专题分布式高并第四期.xlsx");
-        String mainPat="E:\\m3u8\\";
-        for (M3u8Execle m3u8Execle:m3u8Execles){
-            if (!StringUtils.isEmpty(m3u8Execle.getLink())){
-                ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
-                while (mergeXyzMap4TaskExecutor.getActiveCount()<=0){
-                    M3u8Main.downloadM3u8(m3u8Execle,mainPat);
-                }
-
-            }
-        }
+//        List<M3u8Execle> m3u8Execles = ExecleFileUtils.readExecle("E:\\【图灵VIP严选课程】JAVA互联网架构师专题分布式高并第四期.xlsx");
+//        String mainPat="E:\\m3u8\\";
+//        for (M3u8Execle m3u8Execle:m3u8Execles){
+//            if (!StringUtils.isEmpty(m3u8Execle.getLink())){
+//                ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
+//                while (mergeXyzMap4TaskExecutor.getActiveCount()<=0){
+//                    M3u8Main.downloadM3u8(m3u8Execle,mainPat);
+//                }
+//
+//            }
+//        }
 
 //        VideoController mergeXyzMap4TaskExecutor= SpringBootBeanUtil.getBean(VideoController.class);
 //        ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");

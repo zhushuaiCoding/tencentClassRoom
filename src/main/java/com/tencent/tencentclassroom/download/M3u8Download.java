@@ -2,10 +2,7 @@ package com.tencent.tencentclassroom.download;
 
 import com.tencent.tencentclassroom.Exception.M3u8Exception;
 import com.tencent.tencentclassroom.listener.DownloadListener;
-import com.tencent.tencentclassroom.utils.Constant;
-import com.tencent.tencentclassroom.utils.Log;
-import com.tencent.tencentclassroom.utils.MediaFormat;
-import com.tencent.tencentclassroom.utils.StringUtils;
+import com.tencent.tencentclassroom.utils.*;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
@@ -113,15 +110,13 @@ public class M3u8Download {
 
         startDownload1();
     }
-    @Resource(name = "mergeXyzMap4")
+
     private ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor;
-    @Resource(name = "downloadM3u8")
-    private ThreadPoolTaskExecutor downloadM3u8TaskExecutor;
     /**
      * 下载视频改造
      */
     private void startDownload1() {
-
+        mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
         //线程池
 //        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(threadCount);
         int i = 0;

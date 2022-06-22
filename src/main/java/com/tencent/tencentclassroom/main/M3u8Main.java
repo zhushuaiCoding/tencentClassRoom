@@ -34,7 +34,6 @@ public class M3u8Main {
     }
     public synchronized static boolean downloadM3u8(M3u8Execle m3u8Execle,String mainPath) throws InterruptedException {
         System.out.println("请求进来了");
-        Thread.sleep(10000);
 //        return true;
 
         if (StringUtils.isEmpty(m3u8Execle.getLink())){
@@ -43,7 +42,7 @@ public class M3u8Main {
         }
         M3u8Download m3u8Download = M3u8DownloadFactory.getInstance(m3u8Execle.getLink());
         //设置生成目录
-        m3u8Download.setDir(mainPath+m3u8Execle.getFolderName()+"\\"+m3u8Execle.getFileName());
+        m3u8Download.setDir(mainPath+m3u8Execle.getFolderName()+"/"+m3u8Execle.getFileName());
         //设置生成目录
         m3u8Download.setMp4Dir(mainPath+m3u8Execle.getFolderName());
         //设置视频名称
