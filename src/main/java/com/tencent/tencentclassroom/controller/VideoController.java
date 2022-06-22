@@ -1,7 +1,6 @@
 package com.tencent.tencentclassroom.controller;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 功能描述:
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * 创建日期 2022/6/21$
  * @since com.tencent.tencentclassroom.controller
  */
-@Repository
+@RestController
 public class VideoController {
 
 
