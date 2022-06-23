@@ -1,5 +1,6 @@
 package com.tencent.tencentclassroom.controller;
 
+import com.tencent.tencentclassroom.download.M3u8DownloadFactory;
 import com.tencent.tencentclassroom.main.M3u8Main;
 import com.tencent.tencentclassroom.model.M3u8Execle;
 import com.tencent.tencentclassroom.utils.ExecleFileUtils;
@@ -30,16 +31,17 @@ public class VideoController {
     public void uploadCovePdf(@RequestParam(required = false, value = "file") MultipartFile file) throws Exception {
         List<M3u8Execle> m3u8Execles = ExecleFileUtils.readExecleFile(file);
         String mainPat="/opt/roomVideo/";
+        ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
+
+
         for (M3u8Execle m3u8Execle:m3u8Execles){
             if (!StringUtils.isEmpty(m3u8Execle.getLink())){
-                ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
-                while (mergeXyzMap4TaskExecutor.getActiveCount()<=0){
-                    M3u8Main.downloadM3u8(m3u8Execle,mainPat);
-                }
+                while (M3u8DownloadFactory.getInstance()!=null){
 
+                }
+                M3u8Main.downloadM3u8(m3u8Execle,mainPat);
             }
         }
         System.out.println();
     }
-
 }

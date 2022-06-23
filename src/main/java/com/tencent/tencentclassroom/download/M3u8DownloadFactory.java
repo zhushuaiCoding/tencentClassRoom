@@ -45,4 +45,9 @@ public class M3u8DownloadFactory {
         m3u8Download = null;
     }
 
+    public static M3u8Download getInstance() {
+
+        return m3u8Download;
+    }
+
 }

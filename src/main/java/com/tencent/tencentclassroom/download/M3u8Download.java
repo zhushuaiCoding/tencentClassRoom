@@ -112,11 +112,15 @@ public class M3u8Download {
     }
 
     private ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor;
+    private ThreadPoolTaskExecutor downloadM3u8TaskExecutor;
     /**
      * 下载视频改造
      */
     private void startDownload1() {
         mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
+        downloadM3u8TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("downloadM3u8");
+
+
         //线程池
 //        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(threadCount);
         int i = 0;
@@ -125,19 +129,19 @@ public class M3u8Download {
         if (!file1.exists()){
             file1.mkdirs();
         }
-
         //执行多线程下载
         for (String s : tsSet) {
             i++;
-            mergeXyzMap4TaskExecutor.submit(getThread(s, i));
+            downloadM3u8TaskExecutor.submit(getThread(s, i));
 //            fixedThreadPool.execute(getThread(s, i));
         }
 //        fixedThreadPool.shutdown();
         //下载过程监视
+        mergeXyzMap4TaskExecutor.submit(
         new Thread(() -> {
             int consume = 0;
             //轮询是否下载成功
-            while (mergeXyzMap4TaskExecutor.getActiveCount()>0) {
+            while (downloadM3u8TaskExecutor.getActiveCount()>0) {
                 try {
                     consume++;
                     BigDecimal bigDecimal = new BigDecimal(downloadBytes.toString());
@@ -155,7 +159,8 @@ public class M3u8Download {
             //删除多余的ts片段
             deleteFiles();
             Log.i("视频合并完成，欢迎使用!");
-        }).start();
+            M3u8DownloadFactory.destroied();
+        }));
         startListener1();
     }
     private void startListener1() {
@@ -165,7 +170,7 @@ public class M3u8Download {
             }
 
             //轮询是否下载成功
-            while (mergeXyzMap4TaskExecutor.getActiveCount()>0) {
+            while (downloadM3u8TaskExecutor.getActiveCount()>0) {
                 try {
                     Thread.sleep(interval);
                     for (DownloadListener downloadListener : listenerSet){
@@ -182,7 +187,7 @@ public class M3u8Download {
 
         }).start();
         new Thread(() -> {
-            while (mergeXyzMap4TaskExecutor.getActiveCount()>0) {
+            while (downloadM3u8TaskExecutor.getActiveCount()>0) {
                 try {
                     BigDecimal bigDecimal = new BigDecimal(downloadBytes.toString());
                     Thread.sleep(1000L);
