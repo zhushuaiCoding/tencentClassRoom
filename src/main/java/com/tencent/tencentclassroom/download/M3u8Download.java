@@ -136,9 +136,7 @@ public class M3u8Download {
 //            fixedThreadPool.execute(getThread(s, i));
         }
 //        fixedThreadPool.shutdown();
-        //下载过程监视
-        mergeXyzMap4TaskExecutor.submit(
-        new Thread(() -> {
+        FutureTask<Boolean> callable= new FutureTask<>(()->{
             int consume = 0;
             //轮询是否下载成功
             while (downloadM3u8TaskExecutor.getActiveCount()>0) {
@@ -160,8 +158,20 @@ public class M3u8Download {
             deleteFiles();
             Log.i("视频合并完成，欢迎使用!");
             M3u8DownloadFactory.destroied();
-        }));
+            return true;
+        });
+        //下载过程监视
+        mergeXyzMap4TaskExecutor.submit(callable);
         startListener1();
+
+        try {
+            //睡眠等待结果
+            System.out.println( callable.get());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("等待结束");
     }
     private void startListener1() {
         new Thread(() -> {

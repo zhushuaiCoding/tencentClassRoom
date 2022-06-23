@@ -32,7 +32,7 @@ public class M3u8Main {
             }
         }
     }
-    public synchronized static boolean downloadM3u8(M3u8Execle m3u8Execle,String mainPath) throws InterruptedException {
+    public static boolean downloadM3u8(M3u8Execle m3u8Execle,String mainPath) throws InterruptedException {
         System.out.println("请求进来了");
         if (StringUtils.isEmpty(m3u8Execle.getLink())){
             System.out.println("没有文件链接"+m3u8Execle.toString());

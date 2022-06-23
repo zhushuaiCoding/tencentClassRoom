@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.FutureTask;
 
 /**
  * 功能描述:
@@ -32,14 +33,15 @@ public class VideoController {
         List<M3u8Execle> m3u8Execles = ExecleFileUtils.readExecleFile(file);
         String mainPat="/opt/roomVideo/";
         ThreadPoolTaskExecutor mergeXyzMap4TaskExecutor= (ThreadPoolTaskExecutor) SpringBootBeanUtil.getBean("mergeXyzMap4");
-
+        FutureTask<Boolean> callable;
 
         for (M3u8Execle m3u8Execle:m3u8Execles){
             if (!StringUtils.isEmpty(m3u8Execle.getLink())){
-                while (M3u8DownloadFactory.getInstance()!=null){
-
-                }
+//                while (M3u8DownloadFactory.getInstance()!=null){
+//                    System.out.println("文件等待中"+m3u8Execle.getFileName());
+//                }
                 M3u8Main.downloadM3u8(m3u8Execle,mainPat);
+                System.out.println("开始执行文件"+m3u8Execle.toString());
             }
         }
         System.out.println();
