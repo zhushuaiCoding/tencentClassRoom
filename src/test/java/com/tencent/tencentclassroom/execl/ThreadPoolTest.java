@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import com.tencent.tencentclassroom.controller.VideoController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ public class ThreadPoolTest {
     @Test
     public void getTest() throws Exception {
 
+          String dateStr="2022-06-09";
+          LocalDate a;
+        a = LocalDate.parse(dateStr);
+        System.out.println(a);
 //        List<M3u8Execle> m3u8Execles = ExecleFileUtils.readExecle("E:\\【图灵VIP严选课程】JAVA互联网架构师专题分布式高并第四期.xlsx");
 //        String mainPat="E:\\m3u8\\";
 //        for (M3u8Execle m3u8Execle:m3u8Execles){
